@@ -16,7 +16,6 @@ class Product extends Model
         return $products;
     }
 
-    
     public function registProduct($data) {
         // 登録処理
         DB::table('products')->insert([
@@ -25,6 +24,8 @@ class Product extends Model
             'stock' => $data->stock,
             'comment' => $data->comment,
             'img_path' => $data->img_path,
+            'created_at' => NOW(),
+            'updated_at' => NOW(),
         ]);
     }
 }
