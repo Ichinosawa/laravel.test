@@ -48,6 +48,13 @@ class Productcontroller extends Controller
         return redirect()->route('product');
     }
 
+    public function detail($id)
+    {
+        $product = Product::find($id);
+
+        return view('detail', compact('product'));
+    }
+
     
 
     

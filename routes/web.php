@@ -24,4 +24,5 @@ Route::get('/product', [App\Http\Controllers\ProductController::class, 'showList
 Route::post('/delete{id}', [App\Http\Controllers\ProductController::class, 'delete'])->name('product.destroy');
 Route::get('/product_form', [App\Http\Controllers\productController::class, 'create'])->name('product_form');
 Route::post('/product_form', [App\Http\Controllers\productController::class, 'exeCreate'])->name('submit');
+Route::get('/detail{id}', [App\Http\Controllers\productController::class, 'detail'])->name('product.detail');
 
