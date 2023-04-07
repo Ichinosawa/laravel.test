@@ -22,7 +22,7 @@
     <td>{{ $product->price }}</td>
     <td>{{ $product->stock }}</td>
     <td>{{ $product->comment }}</td>
-    <td><a href="" class="btn btn-primary">編集</a></td>
+    <td><a href="{{ route('product.edit', ['id'=>$product->id]) }}" class="btn btn-primary">編集</a></td>
     </tr>
 
     <button type="button" onclick="location.href='{{ route('product') }}'"> 戻る </button>

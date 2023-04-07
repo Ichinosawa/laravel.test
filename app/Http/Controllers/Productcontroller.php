@@ -10,11 +10,17 @@ use Illuminate\Support\Facades\DB;
 
 class Productcontroller extends Controller
 {
+    public function company() {
+        $model = new Product();
+        $products = $model->getCompanyNameById();
+
+    }
+
     public function showList()
     {
         $model = new Product();
         $products = $model->getList();
-
+        
         return view('product', ['products' => $products]);
     }
 
@@ -53,6 +59,21 @@ class Productcontroller extends Controller
         $product = Product::find($id);
 
         return view('detail', compact('product'));
+    }
+
+    public function edit($id)
+    {
+        $product = Product::find($id);
+
+        return view('edit', compact('product'));
+    }
+
+    public function update(ProductRequest $request, $id)
+    {
+        $product = Product::find($id);
+        $product->updateProduct($request, $product);
+
+        return redirect()->route('product', compact('product'));
     }
 
     

@@ -25,4 +25,6 @@ Route::post('/delete{id}', [App\Http\Controllers\ProductController::class, 'dele
 Route::get('/product_form', [App\Http\Controllers\productController::class, 'create'])->name('product_form');
 Route::post('/product_form', [App\Http\Controllers\productController::class, 'exeCreate'])->name('submit');
 Route::get('/detail{id}', [App\Http\Controllers\productController::class, 'detail'])->name('product.detail');
+Route::get('/edit/{id}', [App\Http\Controllers\productController::class, 'edit'])->name('product.edit');
+Route::post('/update/{id}', [App\Http\Controllers\productController::class, 'update'])->name('product.update');
 
