@@ -47,7 +47,7 @@ class Product extends Model
             'img_path' => $data->img_path,
             'created_at' => NOW(),
             'updated_at' => NOW(),
-            'company_id' => $data->company_id
+            'company_id' => $data->company_id,
         ]);
     }
 

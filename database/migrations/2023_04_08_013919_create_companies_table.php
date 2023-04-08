@@ -20,7 +20,32 @@ return new class extends Migration
             $table->string('representative_name');
             $table->timestamps();
         });
+
+        \DB::table('companies')->insert([
+            'id' => 1,
+            'company_name' => 'カルビー',
+            'street_address' => '',
+            'representative_name' => '',
+        ],
+
+        [
+            'id' => 2,
+            'company_name' => '明治',
+            'street_address' => '',
+            'representative_name' => '',
+        ],
+
+        [
+            'id' => 3,
+            'company_name' => '森永',
+            'street_address' => '',
+            'representative_name' => '',
+        ],
+    
+    );
     }
+
+    
 
     /**
      * Reverse the migrations.

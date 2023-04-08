@@ -12,7 +12,7 @@
       </div>
 
       <div class="form-group">
-        <label for="product_name">{{ __('メーカー') }}<span class="badge badge-danger ml-2">{{ __('必須') }}</span></label>
+        <label for="company_id">{{ __('メーカー') }}<span class="badge badge-danger ml-2">{{ __('必須') }}</span></label>
         <input type="text" class="form-control" name="company_id" id="company_id">
       </div>
 

@@ -16,12 +16,13 @@
   </div>
 
   <div class="form-group">
-    <label for="price">{{ __('メーカー') }}<span class="badge badge-danger ml-2">{{ __('必須') }}</span></label>
+    <label for="company_id">{{ __('メーカー') }}<span class="badge badge-danger ml-2">{{ __('必須') }}</span></label>
     <input type="text" class="form-control" name="company_id" id="company_id">
     @if($errors->has('company_id'))
       <p>{{ $errors->first('company_id') }}</p>
     @endif
   </div>
+  
 
   <div class="form-group">
     <label for="price">{{ __('価格') }}<span class="badge badge-danger ml-2">{{ __('必須') }}</span></label>

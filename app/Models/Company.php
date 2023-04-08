@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Company extends Model
 {
@@ -21,5 +22,9 @@ class Company extends Model
         'updated_at'
     ];
 
-    
+    public function getCompany(){
+        $companies = DB::table('companies')->get();
+
+        return $companies;
+    }
 }

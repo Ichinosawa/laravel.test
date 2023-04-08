@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Product;
+use App\Models\Company;
 use App\Http\Requests\ProductRequest;
 use Illuminate\Support\Facades\DB;
 
@@ -16,15 +17,27 @@ class Productcontroller extends Controller
 
     }
 
-    public function showList()
+    public function showList(Request $request)
     {
         $model = new Product();
         $products = $model->getList();
+
+        $keyword = $request->input('keyword');
+
+        $query = Product::query();
+
+        if(!empty($keyword)) {
+            $query->where('product_name', 'LIKE', "%{$keyword}%")
+                ->orWhere('company_id', 'LIKE', "%{$keyword}%");
+        }
         
-        return view('product', ['products' => $products]);
+        $posts = $query->get();
+
+        return view('product', compact('products', 'keyword', 'posts'));
     }
 
     public function create(){
+
         return view('product_form');
     }
 

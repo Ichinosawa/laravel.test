@@ -1,6 +1,14 @@
 @extends('layouts.app')
 
 @section('content')
+
+<div>
+  <form action="{{ route('product') }}" method="GET">
+    <input type="text" name="keyword" value="{{ $keyword }}">
+    <input type="submit" value="検索">
+  </form>
+</div>
+
 <h1>商品一覧</h1>
 
 <table class="table table-striped">
