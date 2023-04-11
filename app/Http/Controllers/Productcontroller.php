@@ -79,18 +79,20 @@ class Productcontroller extends Controller
     }
 
     public function search(ProductRequest $request) {
-        $products = Product::paginate(20);
+        $products = Product::paginate(3);
 
         $search = $request->input('search');
 
         $query = Product::query();
 
-        
-        $products = Product::$query->where('product_name', 'like', "%($request->search)%")
-        ->orwhere('comment', 'like', "%($request->search)%")
-        ->paginate(20);
+        if(!empty($search)) {
+            $query->where('product_name', 'LIKE', "%{$search}%")
+                ->orWhere('comment', 'LIKE', "%{$search}%");
+        }
 
-        return view('product', compact('products'));
+        $products = $query->paginate(3);
+
+        return view('product', compact('products', 'search'));
     } 
     
 
