@@ -22,18 +22,7 @@ class Productcontroller extends Controller
         $model = new Product();
         $products = $model->getList();
 
-        $keyword = $request->input('keyword');
-
-        $query = Product::query();
-
-        if(!empty($keyword)) {
-            $query->where('product_name', 'LIKE', "%{$keyword}%")
-                ->orWhere('company_id', 'LIKE', "%{$keyword}%");
-        }
-        
-        $posts = $query->get();
-
-        return view('product', compact('products', 'keyword', 'posts'));
+        return view('product',compact('products'));
     }
 
     public function create(){
@@ -89,6 +78,20 @@ class Productcontroller extends Controller
         return redirect()->route('product', compact('product'));
     }
 
+    public function search(ProductRequest $request) {
+        $products = Product::paginate(20);
+
+        $search = $request->input('search');
+
+        $query = Product::query();
+
+        
+        $products = Product::$query->where('product_name', 'like', "%($request->search)%")
+        ->orwhere('comment', 'like', "%($request->search)%")
+        ->paginate(20);
+
+        return view('product', compact('products'));
+    } 
     
 
     

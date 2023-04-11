@@ -27,3 +27,4 @@ Route::post('/product_form', [App\Http\Controllers\productController::class, 'ex
 Route::get('/detail{id}', [App\Http\Controllers\productController::class, 'detail'])->name('product.detail');
 Route::get('/edit/{id}', [App\Http\Controllers\productController::class, 'edit'])->name('product.edit');
 Route::post('/update/{id}', [App\Http\Controllers\productController::class, 'update'])->name('product.update');
+Route::post('/product/search', [App\Http\Controllers\productController::class, 'search'])->name('product.search');
