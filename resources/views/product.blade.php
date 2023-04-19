@@ -3,10 +3,14 @@
 @section('content')
 
 <div>
-  <form action="{{ route('product.search') }}" method="POST">
+  <form action="{{ route('product') }}" method="GET">
   @csrf
-    <input type="text" name="search">
-    <button type="submit">検索</button>
+  <div class="product_name.search">
+  <label for="product_name">{{ __('商品名') }}</label>
+    <input type="text" name="keyword">
+  </div>  
+  
+  <input type="submit" value="検索">
   </form>
 </div>
 
@@ -16,11 +20,11 @@
   <thead>
     <tr>
       <th></th>  
-      <th name='product_name'>商品名</th>
+      <th>商品名</th>
       <th>メーカー</th>
       <th>価格</th>
       <th>在庫数</th>
-      <th name='comment'>商品説明</th>
+      <th>商品説明</th>
       <th>画像</th>
       <th>作成日</th>
       <th>更新日</th>
@@ -32,12 +36,12 @@
     @foreach ($products as $product)
     <tr>
       <td>{{ $product->id }}</td>
-      <td name='product_name'>{{ $product->product_name }}</td>
-      <td name='company_id'>{{ $product->company_id }}</td>
-      <td name='price'>{{ $product->price }}</td>
-      <td name='stock'>{{ $product->stock }}</td>
-      <td name='comment'>{{ $product->comment }}</td>
-      <td name='img_path'>{{ $product->img_path }}</td>
+      <td>{{ $product->product_name }}</td>
+      <td>{{ $product->company_id }}</td>
+      <td>{{ $product->price }}</td>
+      <td>{{ $product->stock }}</td>
+      <td>{{ $product->comment }}</td>
+      <td>{{ $product->img_path }}</td>
       <td>{{ $product->created_at }}</td>
       <td>{{ $product->updated_at }}</td>
       <td><a href="{{ route('product.detail', ['id'=>$product->id]) }}" class="btn btn-primary">詳細</a></td>
@@ -53,7 +57,8 @@
     <div>
     
 
-    {{$products->links();}}
+    {{$products->links() }}
+    
        
     </div>
 

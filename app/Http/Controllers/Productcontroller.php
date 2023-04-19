@@ -11,20 +11,36 @@ use Illuminate\Support\Facades\DB;
 
 class Productcontroller extends Controller
 {
-    public function company() {
-        $model = new Product();
-        $products = $model->getCompanyNameById();
-
-    }
+    // public function company() {
+    //     $model = new Product();
+    //     $products = $model->getCompanyNameById();
+    // }
 
     public function showList(Request $request)
     {
-        $model = new Product();
-        $products = $model->getList();
+        $product = Product::query();
+        
 
-        return view('product',compact('products'));
+        $keyword = $request->input('keyword');
+        
+
+        if(!empty($keyword)) {
+            $product->where('product_name', 'LIKE', "%{$keyword}%")
+            ->get();
+        }
+
+       
+
+
+
+            $products = $product->paginate(3);
+            
+
+           
+
+            return view('product', compact('products'));
+        
     }
-
     public function create(){
 
         return view('product_form');
@@ -34,15 +50,15 @@ class Productcontroller extends Controller
 
         DB::beginTransaction();
 
-        try {
-            
+        try {      
             $model = new Product();
             $model->registProduct($request);
-            DB::commit();
         } catch (\Exception $e) {
             DB::rollback();
             return back();
         }
+
+        
         return redirect(route('product'));
     }
 
@@ -78,22 +94,7 @@ class Productcontroller extends Controller
         return redirect()->route('product', compact('product'));
     }
 
-    public function search(ProductRequest $request) {
-        $products = Product::paginate(3);
-
-        $search = $request->input('search');
-
-        $query = Product::query();
-
-        if(!empty($search)) {
-            $query->where('product_name', 'LIKE', "%{$search}%")
-                ->orWhere('comment', 'LIKE', "%{$search}%");
-        }
-
-        $products = $query->paginate(3);
-
-        return view('product', compact('products', 'search'));
-    } 
+   
     
 
     
