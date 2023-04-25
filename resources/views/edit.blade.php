@@ -8,7 +8,7 @@
     <fieldset>
       <div class="form-group">
         <label for="product_name">{{ __('商品名') }}<span class="badge badge-danger ml-2">{{ __('必須') }}</span></label>
-        <input type="text" class="form-control" name="product_name" id="product_name">
+        <input type="text" class="form-control" name="product_name" id="product_name" value="{{$product->product_name}}">
         @if($errors->has('product_name'))
          <p>{{ $errors->first('product_name') }}</p>
         @endif
@@ -16,7 +16,13 @@
 
       <div class="form-group">
         <label for="company_id">{{ __('メーカー') }}<span class="badge badge-danger ml-2">{{ __('必須') }}</span></label>
-        <input type="text" class="form-control" name="company_id" id="company_id">
+        @foreach ($companies as $company)
+        <select class="form-control" name="company_id" id="company_id" value="{{ old('company_id')}}">
+         <option value='{{$company->id}}'>{{ $company->company_name }}</option>
+        </select>
+        @endforeach
+        
+
         @if($errors->has('company_id'))
          <p>{{ $errors->first('company_id') }}</p>
         @endif
@@ -24,7 +30,7 @@
 
       <div class="form-group">
         <label for="product_name">{{ __('価格') }}<span class="badge badge-danger ml-2">{{ __('必須') }}</span></label>
-        <input type="text" class="form-control" name="price" id="price">
+        <input type="text" class="form-control" name="price" id="price" value="{{$product->price}}">
         @if($errors->has('price'))
          <p>{{ $errors->first('price') }}</p>
         @endif
@@ -32,7 +38,7 @@
 
       <div class="form-group">
         <label for="product_name">{{ __('在庫数') }}<span class="badge badge-danger ml-2">{{ __('必須') }}</span></label>
-        <input type="text" class="form-control" name="stock" id="stock">
+        <input type="text" class="form-control" name="stock" id="stock" value="{{$product->stock}}">
         @if($errors->has('stock'))
          <p>{{ $errors->first('stock') }}</p>
         @endif
@@ -40,7 +46,7 @@
 
       <div class="form-group">
         <label for="product_name">{{ __('コメント') }}<span class="badge badge-danger ml-2">{{ __('必須') }}</span></label>
-        <input type="text" class="form-control" name="comment" id="comment">
+        <input type="text" class="form-control" name="comment" id="comment" value="{{$product->comment}}">
         @if($errors->has('comment'))
          <p>{{ $errors->first('comment') }}</p>
         @endif

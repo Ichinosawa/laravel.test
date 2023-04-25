@@ -27,7 +27,7 @@ class Product extends Model
 
     public function getCompanyNameById() {
         return DB::table('products')
-            ->join('companies', 'products.company_id', '=', 'companies.company_name')
+            ->join('companies', 'products.company_id', '=', 'companies.id')
             ->get();
     }
 
