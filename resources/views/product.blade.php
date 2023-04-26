@@ -9,6 +9,15 @@
   <label for="product_name">{{ __('商品名') }}</label>
     <input type="text" name="keyword">
   </div>  
+
+  <div class="company_name.serch">
+  <label for="company_id">{{ __('メーカー') }}<span class="badge badge-danger ml-2">{{ __('必須') }}</span></label>
+        @foreach ($companies as $company)
+        <select class="form-control" name="company_id" id="company_id" value="{{ old('company_id')}}">
+         <option value='{{$company->id}}'>{{ $company->company_name }}</option>
+        </select>
+        @endforeach
+  </div>
   
   <input type="submit" value="検索">
   </form>

@@ -28,6 +28,17 @@ class Company extends Model
     //     return $companies;
     // }
 
+    public static function getCompanyNameById() {
+        return DB::table('products')
+            ->join('companies', 'products.company_id', '=', 'companies.id')
+            ->get();
+    }
+
+    public function getListcompany(){
+        $companies = DB::table('companies')->get();
+
+        return $companies;
+    }
     
 }
 

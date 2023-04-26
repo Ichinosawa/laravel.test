@@ -18,7 +18,8 @@ class Productcontroller extends Controller
 
     public function showList(Request $request)
     {
-        $product = Product::query();
+        $product = new Product();
+        $company = new Company();
         
 
         $keyword = $request->input('keyword');
@@ -26,15 +27,23 @@ class Productcontroller extends Controller
 
         if(!empty($keyword)) {
             $product->join('companies', 'products.company_id', '=', 'companies.id')
-            ->select('products.id', 'products.product_name', 'products.price', 'products.stock', 'products.comment', 'products.img_path','companies.company_name')
+            ->select('products.company_id', 'products.product_name')
             ->where('product_name', 'LIKE', "%{$keyword}%")
+            ->orwhere('company_name', 'LIKE', "%{$keyword}%")
             ->get();
         }
 
+            $products = $product->getList();
             $products = $product->paginate(3);
+
+            $companies = $company->getListcompany();
+            $companies = $company->paginate(3);
+
+
+
             
 
-            return view('product', compact('products'));
+            return view('product', compact('products','companies'));
         
     }
     public function create(){
@@ -83,7 +92,7 @@ class Productcontroller extends Controller
     public function edit($id)
     {
         $product = Product::find($id);
-        $companies = $product ->getCompanyNameById();
+        $companies = Company::getCompanyNameById($product->company_id);
 
         return view('edit', compact('product','companies'));
     }
@@ -92,10 +101,12 @@ class Productcontroller extends Controller
     {
         $product = Product::find($id);
         $product->updateProduct($request, $product);
+        $companies = $product ->getCompanyNameById();
 
-        return redirect()->route('product', compact('product'));
+        return redirect()->route('product', compact('product','companies'));
     }
 
+    
    
     
 
