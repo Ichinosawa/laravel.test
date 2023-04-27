@@ -2,9 +2,10 @@
 
 @section('content')
 
-<div>
-  <form action="{{ route('product') }}" method="GET">
+<div class="search">
+  <form action="{{ route('search_list') }}" method="GET">
   @csrf
+  <!-- 検索フォーム -->
   <div class="product_name.search">
   <label for="product_name">{{ __('商品名') }}</label>
     <input type="text" name="keyword">
@@ -12,9 +13,9 @@
 
   <div class="company_name.serch">
   <label for="company_id">{{ __('メーカー') }}<span class="badge badge-danger ml-2">{{ __('必須') }}</span></label>
-        @foreach ($companies as $company)
+        @foreach ($products as $product)
         <select class="form-control" name="company_id" id="company_id" value="{{ old('company_id')}}">
-         <option value='{{$company->id}}'>{{ $company->company_name }}</option>
+         <option value='{{$product->id}}'>{{ $product->company_name }}</option>
         </select>
         @endforeach
   </div>
@@ -68,7 +69,6 @@
 
     {{$products->links() }}
     
-       
     </div>
 
     <button type="button" onclick="location.href='{{ route('product_form') }}'"> 商品登録 </button>

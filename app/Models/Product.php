@@ -38,6 +38,20 @@ class Product extends Model
         return $products;
     }
 
+    public function SearchList(){
+        //  検索処理
+
+        
+         
+        if(!empty($keyword)) {
+            $product->join('companies', 'products.company_id', '=', 'companies.id')
+            ->select('products.company_id', 'products.product_name')
+            ->where('product_name', 'LIKE', "%{$keyword}%")
+            ->orwhere('company_name', 'LIKE', "%{$keyword}%")
+            ->get();
+        }
+    }
+
     public function registProduct($data) {
         // 登録処理
         DB::table('products')->insert([

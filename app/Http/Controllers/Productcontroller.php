@@ -21,34 +21,29 @@ class Productcontroller extends Controller
         $product = new Product();
         $company = new Company();
         
+        $products = $product->getList();
+        $companies = $company->getListcompany();
 
-        $keyword = $request->input('keyword');
-        
-
-        if(!empty($keyword)) {
-            $product->join('companies', 'products.company_id', '=', 'companies.id')
-            ->select('products.company_id', 'products.product_name')
-            ->where('product_name', 'LIKE', "%{$keyword}%")
-            ->orwhere('company_name', 'LIKE', "%{$keyword}%")
-            ->get();
-        }
-
-            $products = $product->getList();
-            $products = $product->paginate(3);
-
-            $companies = $company->getListcompany();
-            $companies = $company->paginate(3);
-
-
-
-            
-
-            return view('product', compact('products','companies'));
+        return view('product', compact('products','companies'));
         
     }
+
+    public function search(Request $request){
+        $product = new Product();
+        $company = new Company();
+
+        $keyword = $request->input('keyword');
+
+        $products = $product->SearchList($keyword);
+    
+        $products = $product->paginate(3);
+
+        return view('product', compact('products'));
+    }
+
     public function create(){
 
-       $model = new Product();
+       $model = new Company();
        $companies = $model ->getCompanyNameById();
 
         return view('product_form', compact('companies'));
