@@ -18,6 +18,7 @@ class Productcontroller extends Controller
 
     public function showList(Request $request)
     {
+        // 商品一覧画面表示
         $product = new Product();
         $company = new Company();
         
@@ -29,6 +30,7 @@ class Productcontroller extends Controller
     }
 
     public function search(Request $request){
+        // 検索機能
         $product = new Product();
         $company = new Company();
 
@@ -43,6 +45,8 @@ class Productcontroller extends Controller
 
     public function create(){
 
+        // 登録フォーム
+
        $model = new Company();
        $companies = $model ->getCompanyNameById();
 
@@ -51,7 +55,7 @@ class Productcontroller extends Controller
 
     public function exeCreate(ProductRequest $request){
 
-    
+        // 登録処理
 
         DB::beginTransaction();
 
@@ -69,6 +73,7 @@ class Productcontroller extends Controller
 
     public function delete($id)
     {
+        // 削除機能
         
         $product = Product::find($id);
         
@@ -79,6 +84,7 @@ class Productcontroller extends Controller
 
     public function detail($id)
     {
+        // 詳細画面表示
         $product = Product::find($id);
 
         return view('detail', compact('product'));
@@ -86,6 +92,7 @@ class Productcontroller extends Controller
 
     public function edit($id)
     {
+        // 編集処理
         $product = Product::find($id);
         $companies = Company::getCompanyNameById($product->company_id);
 
@@ -94,6 +101,8 @@ class Productcontroller extends Controller
 
     public function update(ProductRequest $request, $id)
     {
+        // 更新処理
+
         $product = Product::find($id);
         $product->updateProduct($request, $product);
         $companies = $product ->getCompanyNameById();

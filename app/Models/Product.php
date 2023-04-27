@@ -68,6 +68,7 @@ class Product extends Model
 
     public function updateProduct($request, $product)
     {
+        // 更新処理
         $result = $product->fill([
             'product_name' => $request->product_name,
             'price' => $request->price,
