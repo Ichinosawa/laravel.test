@@ -13,9 +13,9 @@
 
   <div class="company_name.serch">
   <label for="company_id">{{ __('メーカー') }}<span class="badge badge-danger ml-2">{{ __('必須') }}</span></label>
-        @foreach ($products as $product)
+        @foreach ($companies as $company)
         <select class="form-control" name="company_id" id="company_id" value="{{ old('company_id')}}">
-         <option value='{{$product->id}}'>{{ $product->company_name }}</option>
+         <option value='{{$product->id}}'>{{ $company->company_name }}</option>
         </select>
         @endforeach
   </div>
@@ -47,7 +47,9 @@
     <tr>
       <td>{{ $product->id }}</td>
       <td>{{ $product->product_name }}</td>
-      <td>{{ $product->company_name }}</td>
+      @foreach ($companies as $company)
+      <td>{{ $company->company_name }}</td>
+      @endforeach
       <td>{{ $product->price }}</td>
       <td>{{ $product->stock }}</td>
       <td>{{ $product->comment }}</td>

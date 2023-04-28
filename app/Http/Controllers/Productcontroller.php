@@ -47,7 +47,7 @@ class Productcontroller extends Controller
 
         // 登録フォーム
 
-       $model = new Company();
+       $model = new Product();
        $companies = $model ->getCompanyNameById();
 
         return view('product_form', compact('companies'));

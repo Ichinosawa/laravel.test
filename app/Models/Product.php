@@ -26,9 +26,11 @@ class Product extends Model
     ];
 
     public function getCompanyNameById() {
-        return DB::table('products')
+        $products= DB::table('products')
             ->join('companies', 'products.company_id', '=', 'companies.id')
             ->get();
+
+        return $products;
     }
 
 
@@ -43,13 +45,13 @@ class Product extends Model
 
         
          
-        if(!empty($keyword)) {
-            $product->join('companies', 'products.company_id', '=', 'companies.id')
-            ->select('products.company_id', 'products.product_name')
-            ->where('product_name', 'LIKE', "%{$keyword}%")
-            ->orwhere('company_name', 'LIKE', "%{$keyword}%")
-            ->get();
-        }
+        if (!empty($keyword))
+         { $results = DB::table('products') 
+            ->join('companies', 'products.company_id', '=', 'companies.id') 
+            ->select('products.company_id', 'products.product_name') 
+            ->where('products.product_name', 'LIKE', "%{$keyword}%") 
+            ->orWhere('companies.company_name', 'LIKE', "%{$keyword}%") 
+            ->get(); return $results; }
     }
 
     public function registProduct($data) {
