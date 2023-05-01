@@ -3,7 +3,7 @@
 @section('content')
 
 <div class="search">
-  <form action="{{ route('search_list') }}" method="GET">
+  <form action="{{ route('product') }}" method="GET">
   @csrf
   <!-- 検索フォーム -->
   <div class="product_name.search">
@@ -15,7 +15,7 @@
   <label for="company_id">{{ __('メーカー') }}<span class="badge badge-danger ml-2">{{ __('必須') }}</span></label>
         @foreach ($companies as $company)
         <select class="form-control" name="company_id" id="company_id" value="{{ old('company_id')}}">
-         <option value='{{$product->id}}'>{{ $company->company_name }}</option>
+         <option value='{{$company->id}}'>{{ $company->company_name }}</option>
         </select>
         @endforeach
   </div>
@@ -69,8 +69,7 @@
     <div>
     
 
-    {{$products->links() }}
-    
+   
     </div>
 
     <button type="button" onclick="location.href='{{ route('product_form') }}'"> 商品登録 </button>

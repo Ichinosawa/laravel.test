@@ -22,11 +22,11 @@ class Company extends Model
         'updated_at'
     ];
 
-    // public function getCompanyNameById(){
-    //     $companies = DB::table('companies')->get();
+    public function getCompanyNameById(){
+        $companies = DB::table('companies')->get();
 
-    //     return $companies;
-    // }
+        return $companies;
+    }
 
     public function getListcompany(){
 

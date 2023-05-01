@@ -38,7 +38,7 @@ class Productcontroller extends Controller
 
         $products = $product->SearchList($keyword);
     
-        $products = $product->paginate(3);
+        $products = $product->paginate(10);
 
         return view('product', compact('products'));
     }
@@ -93,8 +93,10 @@ class Productcontroller extends Controller
     public function edit($id)
     {
         // 編集処理
+        $company = new Company();
+
         $product = Product::find($id);
-        $companies = Company::getCompanyNameById($product->company_id);
+        $companies = $company->getCompanyNameById($product->company_id);
 
         return view('edit', compact('product','companies'));
     }

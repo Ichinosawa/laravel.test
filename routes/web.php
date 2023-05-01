@@ -20,8 +20,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/product', [App\Http\Controllers\ProductController::class, 'showList'])->name('product');
-Route::get('/product', [App\Http\Controllers\ProductController::class, 'search'])->name('search_list');
+Route::get('/product', [App\Http\Controllers\ProductController::class, 'showList','search'])->name('product');
 Route::post('/delete{id}', [App\Http\Controllers\ProductController::class, 'delete'])->name('product.destroy');
 Route::get('/product_form', [App\Http\Controllers\productController::class, 'create'])->name('product_form');
 Route::post('/product_form', [App\Http\Controllers\productController::class, 'exeCreate'])->name('submit');

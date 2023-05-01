@@ -51,12 +51,16 @@ class Product extends Model
             ->select('products.company_id', 'products.product_name') 
             ->where('products.product_name', 'LIKE', "%{$keyword}%") 
             ->orWhere('companies.company_name', 'LIKE', "%{$keyword}%") 
-            ->get(); return $results; }
+            ->paginate(10)
+            ->get(); 
+            return $results; }
     }
 
     public function registProduct($data) {
         // 登録処理
-        DB::table('products')->insert([
+        DB::table('products')
+        ->join('companies', 'products.company_id', '=', 'companies.id')
+        ->insert([
             'product_name' => $data->product_name,
             'price' => $data->price,
             'stock' => $data->stock,
@@ -65,7 +69,9 @@ class Product extends Model
             'created_at' => NOW(),
             'updated_at' => NOW(),
             'company_id' => $data->company_id,
+            
         ]);
+
     }
 
     public function updateProduct($request, $product)
