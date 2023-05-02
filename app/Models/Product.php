@@ -35,40 +35,46 @@ class Product extends Model
 
 
     public function getList(){
-        $products = DB::table('products')->get();
+        $products = DB::table('products')
+        ->join('companies','company_id','=','companies.id')
+        ->get();
 
         return $products;
     }
 
-    public function SearchList(){
+    public function SearchList($keyword){
         //  検索処理
 
-        
-         
-        if (!empty($keyword))
-         { $results = DB::table('products') 
-            ->join('companies', 'products.company_id', '=', 'companies.id') 
-            ->select('products.company_id', 'products.product_name') 
-            ->where('products.product_name', 'LIKE', "%{$keyword}%") 
-            ->orWhere('companies.company_name', 'LIKE', "%{$keyword}%") 
-            ->paginate(10)
-            ->get(); 
-            return $results; }
+        //  { $results = DB::table('products') 
+        //     ->join('companies', 'products.company_id', '=', 'companies.id') 
+        //     ->select('products.company_id', 'products.product_name') 
+        //     ->where('products.product_name', 'LIKE', "%{$keyword}%") 
+        //     ->orWhere('companies.company_name', 'LIKE', "%{$keyword}%") 
+        //     ->paginate(10)
+        //     ->get(); 
+            // }
+
+           $products=DB::table('products')
+           ->join('companies','company_id','=','companies.id')
+           ->select('products.*','companies.campanies_name')
+           ->where('products.product_name', 'LIKE', "%$keyword%")
+           ->get();
+
+           return $products;
     }
 
     public function registProduct($data) {
         // 登録処理
-        DB::table('products')
-        ->join('companies', 'products.company_id', '=', 'companies.id')
-        ->insert([
+        DB::table('products') ->insert([
             'product_name' => $data->product_name,
             'price' => $data->price,
             'stock' => $data->stock,
             'comment' => $data->comment,
             'img_path' => $data->img_path,
+            'company_id' => $data->company_id,
             'created_at' => NOW(),
             'updated_at' => NOW(),
-            'company_id' => $data->company_id,
+            
             
         ]);
 

@@ -18,7 +18,9 @@
     <tr>
     <td>{{ $product->img_path }}</td>
     <td>{{ $product->product_name }}</td>
-    <td>{{ $product->company_id }}</td>
+    @foreach ($companies as $company)
+    <td>{{ $company->company_name }}</td>
+    @endforeach
     <td>{{ $product->price }}</td>
     <td>{{ $product->stock }}</td>
     <td>{{ $product->comment }}</td>

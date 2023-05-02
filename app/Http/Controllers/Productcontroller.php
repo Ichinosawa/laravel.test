@@ -31,14 +31,13 @@ class Productcontroller extends Controller
 
     public function search(Request $request){
         // 検索機能
+        $keyword = $request->input('keyword');
+
         $product = new Product();
         $company = new Company();
 
-        $keyword = $request->input('keyword');
-
         $products = $product->SearchList($keyword);
-    
-        $products = $product->paginate(10);
+        dd($keyword);
 
         return view('product', compact('products'));
     }
@@ -87,7 +86,11 @@ class Productcontroller extends Controller
         // 詳細画面表示
         $product = Product::find($id);
 
-        return view('detail', compact('product'));
+        $company = new Company();
+
+        $companies = $company->getCompanyNameById();
+
+        return view('detail', compact('product','companies'));
     }
 
     public function edit($id)

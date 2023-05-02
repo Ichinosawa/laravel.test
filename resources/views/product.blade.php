@@ -15,7 +15,7 @@
   <label for="company_id">{{ __('メーカー') }}<span class="badge badge-danger ml-2">{{ __('必須') }}</span></label>
         @foreach ($companies as $company)
         <select class="form-control" name="company_id" id="company_id" value="{{ old('company_id')}}">
-         <option value='{{$company->id}}'>{{ $company->company_name }}</option>
+         <option value='{{$company->id}}' name="keyword">{{ $company->company_name }}</option>
         </select>
         @endforeach
   </div>
