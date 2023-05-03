@@ -37,9 +37,9 @@ class Productcontroller extends Controller
         $company = new Company();
 
         $products = $product->SearchList($keyword);
-        dd($keyword);
+        $companies = $company->SearchList($keyword);
 
-        return view('product', compact('products'));
+        return view('product', compact('products','companies'));
     }
 
     public function create(){
@@ -61,6 +61,7 @@ class Productcontroller extends Controller
         try {      
             $model = new Product();
             $model->registProduct($request);
+            DB::commit();
         } catch (\Exception $e) {
             DB::rollback();
             return back();

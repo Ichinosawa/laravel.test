@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
+use App\Models\Company;
 
 class Product extends Model
 {
@@ -36,7 +37,6 @@ class Product extends Model
 
     public function getList(){
         $products = DB::table('products')
-        ->join('companies','company_id','=','companies.id')
         ->get();
 
         return $products;
@@ -45,19 +45,11 @@ class Product extends Model
     public function SearchList($keyword){
         //  検索処理
 
-        //  { $results = DB::table('products') 
-        //     ->join('companies', 'products.company_id', '=', 'companies.id') 
-        //     ->select('products.company_id', 'products.product_name') 
-        //     ->where('products.product_name', 'LIKE', "%{$keyword}%") 
-        //     ->orWhere('companies.company_name', 'LIKE', "%{$keyword}%") 
-        //     ->paginate(10)
-        //     ->get(); 
-            // }
-
            $products=DB::table('products')
            ->join('companies','company_id','=','companies.id')
-           ->select('products.*','companies.campanies_name')
+           ->select('products.*','companies.campany_name')
            ->where('products.product_name', 'LIKE', "%$keyword%")
+           ->orwhere('companies.company_name', 'LIKE', "%$keyword%")
            ->get();
 
            return $products;

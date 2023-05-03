@@ -1,3 +1,4 @@
+<!-- 登録フォーム -->
 @extends('layouts.app')
 
 @section('content')

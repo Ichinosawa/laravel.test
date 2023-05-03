@@ -1,21 +1,23 @@
+<!-- 商品一覧画面 -->
+
 @extends('layouts.app')
 
 @section('content')
 
 <div class="search">
-  <form action="{{ route('product') }}" method="GET">
+  <form action="{{ route('search') }}" method="GET">
   @csrf
   <!-- 検索フォーム -->
   <div class="product_name.search">
   <label for="product_name">{{ __('商品名') }}</label>
-    <input type="text" name="keyword">
+    <input type="text" name="keyword" id="keyword">
   </div>  
 
   <div class="company_name.serch">
   <label for="company_id">{{ __('メーカー') }}<span class="badge badge-danger ml-2">{{ __('必須') }}</span></label>
         @foreach ($companies as $company)
         <select class="form-control" name="company_id" id="company_id" value="{{ old('company_id')}}">
-         <option value='{{$company->id}}' name="keyword">{{ $company->company_name }}</option>
+         <option name="keyword" id="keyword">{{ $company->company_name }}</option>
         </select>
         @endforeach
   </div>
