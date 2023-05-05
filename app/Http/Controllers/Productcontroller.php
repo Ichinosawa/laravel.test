@@ -11,48 +11,71 @@ use Illuminate\Support\Facades\DB;
 
 class Productcontroller extends Controller
 {
-    // public function company() {
-    //     $model = new Product();
-    //     $products = $model->getCompanyNameById();
-    // }
+   
 
     public function showList(Request $request)
     {
-        // 商品一覧画面表示
-        $product = new Product();
-        $company = new Company();
+       
+        // $product = new Product();
+        // $company = new Company();
         
-        $products = $product->getList();
-        $companies = $company->getListcompany();
+        // $products = $product->getList();
+        // $companies = $company->getListcompany();
 
-        return view('product', compact('products','companies'));
-        
-    }
+        // return view('product', compact('products','companies'));
 
-    public function search(Request $request){
-        // 検索機能
+         // 商品一覧画面表示/検索処理
+
         $keyword = $request->input('keyword');
 
-        $product = new Product();
-        $company = new Company();
+        $query = Product::query();
 
-        $products = $product->SearchList($keyword);
-        $companies = $company->SearchList($keyword);
+        // メーカーの検索部分の値挿入
+        $model = new Company();
+        $companies = $model ->getCompanyNameById();
 
-        return view('product', compact('products','companies'));
+        
+
+            $query ->join('companies','company_id','=','companies.id')
+            ->select('products.*','companies.company_name')
+            ->where('products.product_name', 'LIKE', "%$keyword%")
+            ->orwhere('companies.company_name', 'LIKE', "%$keyword%")
+            ->get();
+
+        $products = $query->get();
+            
+        return view('product', compact('products','keyword','companies'));
+
+        
     }
+
+    // public function search(Request $request){
+    //     // 検索機能
+    //     $keyword = $request->input('keyword');
+
+    //     $product = new Product();
+    //     $company = new Company();
+
+    //     $products = $product->SearchList($keyword);
+       
+
+    //     return view('product', compact('products','keyword'));
+
+    
+
+    // }
 
     public function create(){
 
         // 登録フォーム
 
-       $model = new Product();
+       $model = new Company();
        $companies = $model ->getCompanyNameById();
 
         return view('product_form', compact('companies'));
     }
 
-    public function exeCreate(ProductRequest $request){
+    public function exeCreate(Request $request){
 
         // 登録処理
 

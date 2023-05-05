@@ -5,21 +5,23 @@
 @section('content')
 
 <div class="search">
-  <form action="{{ route('search') }}" method="GET">
+  <form action="{{ route('product') }}" method="GET">
   @csrf
   <!-- 検索フォーム -->
   <div class="product_name.search">
   <label for="product_name">{{ __('商品名') }}</label>
-    <input type="text" name="keyword" id="keyword">
+    <input type="text" name="keyword" id="keyword" >
   </div>  
 
   <div class="company_name.serch">
-  <label for="company_id">{{ __('メーカー') }}<span class="badge badge-danger ml-2">{{ __('必須') }}</span></label>
+  <label for="company_name">{{ __('メーカー') }}<span class="badge badge-danger ml-2">{{ __('必須') }}</span></label>
+        <select class="form-control" name="company_name" id="company_name">
+          <option>{{"メーカーを選択してください"}}</option>
         @foreach ($companies as $company)
-        <select class="form-control" name="company_id" id="company_id" value="{{ old('company_id')}}">
-         <option name="keyword" id="keyword">{{ $company->company_name }}</option>
+         <option name="keyword" id="keyword" >{{ $company->company_name }}</option>
+         @endforeach
         </select>
-        @endforeach
+       
   </div>
   
   <input type="submit" value="検索">
@@ -49,9 +51,7 @@
     <tr>
       <td>{{ $product->id }}</td>
       <td>{{ $product->product_name }}</td>
-      @foreach ($companies as $company)
-      <td>{{ $company->company_name }}</td>
-      @endforeach
+      <td>{{ $product->company_name }}</td>
       <td>{{ $product->price }}</td>
       <td>{{ $product->stock }}</td>
       <td>{{ $product->comment }}</td>
@@ -70,7 +70,7 @@
 
     <div>
     
-
+   
    
     </div>
 

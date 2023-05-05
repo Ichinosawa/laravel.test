@@ -35,25 +35,27 @@ class Product extends Model
     }
 
 
-    public function getList(){
-        $products = DB::table('products')
-        ->get();
+    // public function getList(){
+    //     $products = DB::table('products')
+    //     ->get();
 
-        return $products;
-    }
+    //     return $products;
+    // }
 
-    public function SearchList($keyword){
-        //  検索処理
+    // public function SearchList($keyword){
+    //     //  検索処理
+    //      if($keyword){
+    //        $products=DB::table('products')
+    //        ->join('companies','company_id','=','companies.id')
+    //        ->select('products.*','companies.company_name')
+    //        ->where('products.product_name', 'LIKE', "%$keyword%")
+    //        ->orwhere('companies.company_name', 'LIKE', "%$keyword%")
+    //        ->paginate(10)
+    //        ->get();
+    //      }
 
-           $products=DB::table('products')
-           ->join('companies','company_id','=','companies.id')
-           ->select('products.*','companies.campany_name')
-           ->where('products.product_name', 'LIKE', "%$keyword%")
-           ->orwhere('companies.company_name', 'LIKE', "%$keyword%")
-           ->get();
-
-           return $products;
-    }
+    //        return $products;
+    // }
 
     public function registProduct($data) {
         // 登録処理
@@ -66,8 +68,6 @@ class Product extends Model
             'company_id' => $data->company_id,
             'created_at' => NOW(),
             'updated_at' => NOW(),
-            
-            
         ]);
 
     }

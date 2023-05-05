@@ -22,6 +22,7 @@
   
  
   <select class="form-control" name="company_id" id="company_id" value="{{ old('company_id')}}">
+    <option>{{"メーカーを選択してください"}}</option>
   @foreach ($companies as $company)
     <option value='{{$company->id}}'>{{ $company->company_name }}</option>
   @endforeach

@@ -16,11 +16,13 @@
 
       <div class="form-group">
         <label for="company_id">{{ __('メーカー') }}<span class="badge badge-danger ml-2">{{ __('必須') }}</span></label>
-        @foreach ($companies as $company)
         <select class="form-control" name="company_id" id="company_id" value="{{ old('company_id')}}">
+         <option>{{"メーカーを選択してください"}}</option>
+         @foreach ($companies as $company)
          <option value='{{$company->id}}'>{{ $company->company_name }}</option>
+         @endforeach
         </select>
-        @endforeach
+       
         
 
         @if($errors->has('company_id'))
