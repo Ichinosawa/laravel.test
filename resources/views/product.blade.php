@@ -15,10 +15,10 @@
 
   <div class="company_name.serch">
   <label for="company_name">{{ __('メーカー') }}<span class="badge badge-danger ml-2">{{ __('必須') }}</span></label>
-        <select class="form-control" name="company_name" id="company_name">
+        <select class="form-control" name="search" id="search">
           <option>{{"メーカーを選択してください"}}</option>
         @foreach ($companies as $company)
-         <option name="keyword" id="keyword" >{{ $company->company_name }}</option>
+         <option>{{ $company->company_name }}</option>
          @endforeach
         </select>
        

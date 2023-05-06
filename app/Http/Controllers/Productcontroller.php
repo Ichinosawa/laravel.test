@@ -27,6 +27,7 @@ class Productcontroller extends Controller
          // 商品一覧画面表示/検索処理
 
         $keyword = $request->input('keyword');
+        $search = $request->input('search');
 
         $query = Product::query();
 
@@ -35,17 +36,27 @@ class Productcontroller extends Controller
         $companies = $model ->getCompanyNameById();
 
         
-
+           
             $query ->join('companies','company_id','=','companies.id')
-            ->select('products.*','companies.company_name')
-            ->where('products.product_name', 'LIKE', "%$keyword%")
-            ->orwhere('companies.company_name', 'LIKE', "%$keyword%")
-            ->get();
+            ->select('products.*','companies.company_name');
+            // ->where('products.product_name', 'LIKE', "%$keyword%")
+            // ->orwhere('companies.company_name', 'LIKE', "%$keyword%")
+            // ->get();
+
+            if($keyword){
+                $query->where('product_name', 'LIKE', "%$keyword%");
+            }
+
+            if($search){
+                $query->where('company_name', 'LIKE', "%$search%");
+            }
+
+
 
         $products = $query->get();
             
-        return view('product', compact('products','keyword','companies'));
-
+        return view('product', compact('products','keyword','companies','search'));
+           
         
     }
 
