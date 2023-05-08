@@ -19,11 +19,19 @@ Route::get('/', function () {
 
 Auth::routes();
 
+// ログイン画面
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// 商品一覧画面表示 検索機能
 Route::get('/product', [App\Http\Controllers\ProductController::class, 'showList','search'])->name('product');
+// 削除機能
 Route::post('/delete{id}', [App\Http\Controllers\ProductController::class, 'delete'])->name('product.destroy');
+// 登録画面表示
 Route::get('/product_form', [App\Http\Controllers\productController::class, 'create'])->name('product_form');
+// 登録処理
 Route::post('/product_form', [App\Http\Controllers\productController::class, 'exeCreate'])->name('submit');
+// 詳細画面
 Route::get('/detail{id}', [App\Http\Controllers\productController::class, 'detail'])->name('product.detail');
+// 編集画面
 Route::get('/edit/{id}', [App\Http\Controllers\productController::class, 'edit'])->name('product.edit');
+// 更新処理
 Route::post('/update/{id}', [App\Http\Controllers\productController::class, 'update'])->name('product.update');

@@ -15,15 +15,6 @@ class Productcontroller extends Controller
 
     public function showList(Request $request)
     {
-       
-        // $product = new Product();
-        // $company = new Company();
-        
-        // $products = $product->getList();
-        // $companies = $company->getListcompany();
-
-        // return view('product', compact('products','companies'));
-
          // 商品一覧画面表示/検索処理
 
         $keyword = $request->input('keyword');
@@ -39,9 +30,6 @@ class Productcontroller extends Controller
            
             $query ->join('companies','company_id','=','companies.id')
             ->select('products.*','companies.company_name');
-            // ->where('products.product_name', 'LIKE', "%$keyword%")
-            // ->orwhere('companies.company_name', 'LIKE', "%$keyword%")
-            // ->get();
 
             if($keyword){
                 $query->where('product_name', 'LIKE', "%$keyword%");
@@ -59,22 +47,6 @@ class Productcontroller extends Controller
            
         
     }
-
-    // public function search(Request $request){
-    //     // 検索機能
-    //     $keyword = $request->input('keyword');
-
-    //     $product = new Product();
-    //     $company = new Company();
-
-    //     $products = $product->SearchList($keyword);
-       
-
-    //     return view('product', compact('products','keyword'));
-
-    
-
-    // }
 
     public function create(){
 

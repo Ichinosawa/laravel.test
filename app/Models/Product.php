@@ -27,35 +27,13 @@ class Product extends Model
     ];
 
     public function getCompanyNameById() {
+        // テーブル結合
         $products= DB::table('products')
             ->join('companies', 'products.company_id', '=', 'companies.id')
             ->get();
 
         return $products;
     }
-
-
-    // public function getList(){
-    //     $products = DB::table('products')
-    //     ->get();
-
-    //     return $products;
-    // }
-
-    // public function SearchList($keyword){
-    //     //  検索処理
-    //      if($keyword){
-    //        $products=DB::table('products')
-    //        ->join('companies','company_id','=','companies.id')
-    //        ->select('products.*','companies.company_name')
-    //        ->where('products.product_name', 'LIKE', "%$keyword%")
-    //        ->orwhere('companies.company_name', 'LIKE', "%$keyword%")
-    //        ->paginate(10)
-    //        ->get();
-    //      }
-
-    //        return $products;
-    // }
 
     public function registProduct($data) {
         // 登録処理
