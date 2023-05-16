@@ -68,6 +68,7 @@ class Product extends Model
 
     public function search($keyword,$search)
     {
+        // 検索処理
         $products = DB::query();
 
         $products= DB::table('products')
