@@ -23,7 +23,7 @@ class Company extends Model
     ];
 
     public function getCompanyNameById(){
-        // テーブル結合
+        
         $companies = DB::table('companies')->get();
 
         return $companies;

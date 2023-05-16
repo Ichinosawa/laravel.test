@@ -35,3 +35,7 @@ Route::get('/detail{id}', [App\Http\Controllers\productController::class, 'detai
 Route::get('/edit/{id}', [App\Http\Controllers\productController::class, 'edit'])->name('product.edit');
 // 更新処理
 Route::post('/update/{id}', [App\Http\Controllers\productController::class, 'update'])->name('product.update');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

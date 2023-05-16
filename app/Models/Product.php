@@ -65,4 +65,26 @@ class Product extends Model
 
         return $result;
     }
+
+    public function search($keyword,$search)
+    {
+        $products = DB::query();
+
+        $products= DB::table('products')
+        ->join('companies','company_id','=','companies.id')
+        ->select('products.*','companies.company_name');
+
+        if($keyword){
+            $products->where('product_name', 'LIKE', "%$keyword%");
+        }
+
+        if($search){
+            $products->where('company_name', 'LIKE', "%$search%");
+        }
+        $product= $products->get();
+
+        return $product;
+      
+    }
+    
 }

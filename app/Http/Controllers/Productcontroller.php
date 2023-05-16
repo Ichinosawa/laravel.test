@@ -20,28 +20,17 @@ class Productcontroller extends Controller
         $keyword = $request->input('keyword');
         $search = $request->input('search');
 
-        $query = Product::query();
+       
+        $nonon = new Product();
 
         // メーカーの検索部分の値挿入
         $model = new Company();
         $companies = $model ->getCompanyNameById();
 
-        
-           
-            $query ->join('companies','company_id','=','companies.id')
-            ->select('products.*','companies.company_name');
-
-            if($keyword){
-                $query->where('product_name', 'LIKE', "%$keyword%");
-            }
-
-            if($search){
-                $query->where('company_name', 'LIKE', "%$search%");
-            }
 
 
-
-        $products = $query->get();
+        $products = $nonon->search($keyword,$search);
+       
             
         return view('product', compact('products','keyword','companies','search'));
            
