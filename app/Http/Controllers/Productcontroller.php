@@ -19,6 +19,11 @@ class Productcontroller extends Controller
 
         $keyword = $request->input('keyword');
         $search = $request->input('search');
+        $jougenprice = $request->input('jougen.price');
+        $kagenprice = $request->input('kagen.price');
+        $jougenstock = $request->input('jougen.stock');
+        $kagenstock = $request->input('kagen.stock');
+        
 
        
         $nonon = new Product();
@@ -29,10 +34,10 @@ class Productcontroller extends Controller
 
 
 
-        $products = $nonon->search($keyword,$search);
+        $products = $nonon->search($keyword,$search,$jougenprice,$kagenprice,$jougenstock,$kagenstock);
        
             
-        return view('product', compact('products','keyword','companies','search'));
+        return view('product', compact('products','keyword','companies','search','jougenprice'));
            
         
     }

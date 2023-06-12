@@ -1,6 +1,8 @@
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
+<script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -76,5 +78,25 @@
             @yield('content')
         </main>
     </div>
+
+    <script>
+        $(".search").click(function(){
+      $.ajax({
+         type:"GET",
+         url:"{{ route('product') }}",
+         dataType: 'json',
+      })   
+      .done(function(json){
+         //通信成功で実行される処理
+         console.log(json);
+      })
+      .fail(function(){
+         //通信が失敗した時に実行される処理
+      })
+      .always(function(){
+         //通信の成功と失敗に関わらず実行される処理
+      });
+   });
+    </script>
 </body>
 </html>

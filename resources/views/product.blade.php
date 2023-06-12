@@ -21,10 +21,40 @@
          <option>{{ $company->company_name }}</option>
          @endforeach
         </select>
-       
+  </div>
+
+  <div class="price.search">
+    <label for="price">{{ __('価格') }}</label>
+
+    <div class="jougen">
+    <p>{{ __('上限') }}</p>
+    <input type="text" name="jougen.price" id="jougen.price" >
+    </div>
+
+    <div class="kagen">
+    <p>{{ __('下限') }}</p>
+    <input type="text" name="kagen.price" id="kagen.price" >
+    </div>
+
+  </div>
+
+  <div class="stock.serach">
+  <label for="price">{{ __('在庫数') }}</label>
+
+  <div class="jougen">
+
+    <p>{{ __('上限') }}</p>
+    <input type="text" name="jougen.stock" id="jougen.stock" >
+    </div>
+
+    <div class="kagen">
+    <p>{{ __('下限') }}</p>
+    <input type="text" name="kagen.stock" id="kagen.stock" >
+    </div>
+
   </div>
   
-  <input type="submit" value="検索">
+  <input type="submit" value="検索" id="kensaku">
   </form>
 </div>
 

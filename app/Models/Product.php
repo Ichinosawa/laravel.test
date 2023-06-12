@@ -66,7 +66,7 @@ class Product extends Model
         return $result;
     }
 
-    public function search($keyword,$search)
+    public function search($keyword,$search,$jougenprice,$kagenprice)
     {
         // 検索処理
         $products = DB::query();
@@ -82,6 +82,17 @@ class Product extends Model
         if($search){
             $products->where('company_name', 'LIKE', "%$search%");
         }
+
+        // 確認していただきたいところ
+        if($jougenprice){
+            $products->where('price',max('$jougenprice'))->first();
+        }
+
+        if($kagenprice){
+            $products->where('price',min('$kagenprice'))->first();
+        }
+
+
         $product= $products->get();
 
         return $product;
