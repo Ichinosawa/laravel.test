@@ -85,11 +85,11 @@ class Product extends Model
 
         // 確認していただきたいところ
         if($jougenprice){
-            $products->where('price',max('$jougenprice'))->first();
+            $products->where('price','<',$jougenprice);
         }
 
         if($kagenprice){
-            $products->where('price',min('$kagenprice'))->first();
+            $products->where('price','>',$kagenprice);
         }
 
 

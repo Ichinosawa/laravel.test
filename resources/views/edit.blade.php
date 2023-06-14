@@ -29,7 +29,7 @@
 
       <div class="form-group">
         <label for="product_name">{{ __('価格') }}<span class="badge badge-danger ml-2">{{ __('必須') }}</span></label>
-        <input type="text" class="form-control" name="price" id="price" value="{{$product->price}}">
+        <input type="number" class="form-control" name="price" id="price" value="{{$product->price}}">
         @if($errors->has('price'))
          <p>{{ $errors->first('price') }}</p>
         @endif

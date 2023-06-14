@@ -28,12 +28,12 @@
 
     <div class="jougen">
     <p>{{ __('上限') }}</p>
-    <input type="text" name="jougen.price" id="jougen.price" >
+    <input type="number" name="jougen.price" id="jougen.price" >
     </div>
 
     <div class="kagen">
     <p>{{ __('下限') }}</p>
-    <input type="text" name="kagen.price" id="kagen.price" >
+    <input type="number" name="kagen.price" id="kagen.price" >
     </div>
 
   </div>

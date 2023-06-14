@@ -37,7 +37,7 @@ class Productcontroller extends Controller
         $products = $nonon->search($keyword,$search,$jougenprice,$kagenprice,$jougenstock,$kagenstock);
        
             
-        return view('product', compact('products','keyword','companies','search','jougenprice'));
+        return view('product', compact('products','keyword','companies','search','jougenprice','kagenprice'));
            
         
     }
