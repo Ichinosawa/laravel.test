@@ -85,13 +85,12 @@ class Product extends Model
 
         // 確認していただきたいところ
         if($jougenprice){
-            $products->where('price','<',$jougenprice);
+            $products->where('price','>',$jougenprice);
+        }elseif($kagenprice){
+            $products->where('price','<',$kagenprice);
         }
 
-        if($kagenprice){
-            $products->where('price','>',$kagenprice);
-        }
-
+        
 
         $product= $products->get();
 
