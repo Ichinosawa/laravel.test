@@ -17,6 +17,7 @@
   <label for="company_name">{{ __('メーカー') }}<span class="badge badge-danger ml-2">{{ __('必須') }}</span></label>
         <select class="form-control" name="search" id="search">
           <option>{{"メーカーを選択してください"}}</option>
+          <option>{{""}}</option>
         @foreach ($companies as $company)
          <option>{{ $company->company_name }}</option>
          @endforeach
@@ -28,28 +29,27 @@
 
     <div class="jougen">
     <p>{{ __('上限') }}</p>
-    <input type="number" name="jougen.price" id="jougen.price" >
+    <input type="number" name="jougenprice" id="jougenprice" >
     </div>
 
     <div class="kagen">
     <p>{{ __('下限') }}</p>
-    <input type="number" name="kagen.price" id="kagen.price" >
+    <input type="number" name="kagenprice" id="kagenprice" >
     </div>
 
   </div>
 
   <div class="stock.serach">
-  <label for="price">{{ __('在庫数') }}</label>
+  <label for="stock">{{ __('在庫数') }}</label>
 
-  <div class="jougen">
-
+    <div class="jougen">
     <p>{{ __('上限') }}</p>
-    <input type="text" name="jougen.stock" id="jougen.stock" >
+    <input type="number" name="jougenstock" id="jougenstock" >
     </div>
 
     <div class="kagen">
     <p>{{ __('下限') }}</p>
-    <input type="text" name="kagen.stock" id="kagen.stock" >
+    <input type="number" name="kagenstock" id="kagenstock" >
     </div>
 
   </div>
@@ -63,12 +63,12 @@
 <table class="table table-striped">
   <thead>
     <tr>
-      <th></th>  
-      <th>商品名</th>
-      <th>メーカー</th>
-      <th>価格</th>
-      <th>在庫数</th>
-      <th>商品説明</th>
+      <th>@sortablelink('id', 'ID')</th>  
+      <th>@sortablelink('product_name', '商品名')</th>
+      <th>@sortablelink('company_name', 'メーカー')</th>
+      <th>@sortablelink('price', '価格')</th>
+      <th>@sortablelink('stock', '在庫数')</th>
+      <th>@sortablelink('comment', 'コメント')</th>
       <th>画像</th>
       <th>作成日</th>
       <th>更新日</th>
@@ -107,6 +107,7 @@
     <button type="button" onclick="location.href='{{ route('product_form') }}'"> 商品登録 </button>
   </tbody>
 </table>
+
 
 
 @endsection

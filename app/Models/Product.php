@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 use App\Models\Company;
+use Kyslik\ColumnSortable\Sortable;
 
 class Product extends Model
 {
@@ -25,6 +26,9 @@ class Product extends Model
         'created_at',
         'updated_at'
     ];
+    
+        // ソート機能
+    use Sortable;
 
     public function getCompanyNameById() {
         // テーブル結合
@@ -66,14 +70,18 @@ class Product extends Model
         return $result;
     }
 
-    public function search($keyword,$search,$jougenprice,$kagenprice)
+    public function search($keyword,$search,$jougenprice,$kagenprice,$jougenstock,$kagenstock)
     {
+        
         // 検索処理
         $products = DB::query();
 
-        $products= DB::table('products')
+     
+
+        // ソート機能とテーブル結合
+        $products= Product::sortable('products')
         ->join('companies','company_id','=','companies.id')
-        ->select('products.*','companies.company_name');
+        ->select('products.*','companies.company_name','products.price','products.stock');
 
         if($keyword){
             $products->where('product_name', 'LIKE', "%$keyword%");
@@ -83,17 +91,23 @@ class Product extends Model
             $products->where('company_name', 'LIKE', "%$search%");
         }
 
-        // 確認していただきたいところ
         if($jougenprice){
-            $products->where('price','>',$jougenprice);
+            $products->where('price','<',$jougenprice);
         }
 
         if($kagenprice){
-            $products->where('price','<',$kagenprice);
+            $products->where('price','>',$kagenprice);
         }
 
+        if($jougenstock){
+            $products->where('stock','<',$jougenstock);
+        }
 
-        $product= $products->get();
+        if($kagenstock){
+            $products->where('stock','>',$kagenstock);
+        }
+
+        $product = $products->get();
 
         return $product;
       

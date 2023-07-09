@@ -97,6 +97,26 @@
          //通信の成功と失敗に関わらず実行される処理
       });
    });
+
+   $(".btn btn-danger").click(function(){
+      $.ajax({
+         type:"POST",
+         url:"{{ route('product.destroy') }}",
+         dataType: 'json',
+      })   
+      .done(function(json){
+         //通信成功で実行される処理
+         console.log(json);
+      })
+      .fail(function(){
+         //通信が失敗した時に実行される処理
+      })
+      .always(function(){
+         //通信の成功と失敗に関わらず実行される処理
+      });
+   });
+
+
     </script>
 </body>
 </html>

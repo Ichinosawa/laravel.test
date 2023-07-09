@@ -19,10 +19,10 @@ class Productcontroller extends Controller
 
         $keyword = $request->input('keyword');
         $search = $request->input('search');
-        $jougenprice = $request->input('jougen.price');
-        $kagenprice = $request->input('kagen.price');
-        $jougenstock = $request->input('jougen.stock');
-        $kagenstock = $request->input('kagen.stock');
+        $jougenprice = $request->input('jougenprice');
+        $kagenprice = $request->input('kagenprice');
+        $jougenstock = $request->input('jougenstock');
+        $kagenstock = $request->input('kagenstock');
         
 
        
@@ -33,11 +33,12 @@ class Productcontroller extends Controller
         $companies = $model ->getCompanyNameById();
 
 
-
+        // ソート機能と検索機能
         $products = $nonon->search($keyword,$search,$jougenprice,$kagenprice,$jougenstock,$kagenstock);
+
        
             
-        return view('product', compact('products','keyword','companies','search','jougenprice','kagenprice'));
+        return view('product', compact('products','keyword','companies','search','jougenprice','kagenprice','jougenstock','kagenstock'));
            
         
     }
