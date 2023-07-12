@@ -117,17 +117,17 @@
   }
 
   function deleteItem(event) {
-    event.preventDefault(); // フォームのデフォルトの送信を防止
+    event.preventDefault();
     var form = $(event.target);
     var id = form.find('button').data('id');
-    var url = "delete" + id; // 適切なURLを指定します
-    // Ajaxリクエストの作成
+    var url = "delete" + id; 
+
     $.ajax({
         url: url,
         type: 'POST',
         data: form.serialize(),
         success: function(data) {
-            handleSubmit(event); // handleSubmit関数の呼び出し
+            handleSubmit(event); 
         },
         error: function(xhr) {
             console.log(xhr);
@@ -136,7 +136,7 @@
 }
 
     $(document).ready(function() {
-    // フォームのサブミットイベントを処理
+    
     $('#search').submit(handleSubmit);
     $(document).on('submit', 'form[id^="deleteForm-"]', function(event) {
         if(confirm("削除しますか？")) {
