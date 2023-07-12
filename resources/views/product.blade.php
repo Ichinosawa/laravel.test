@@ -4,8 +4,9 @@
 
 @section('content')
 
-<div class="search">
-  <form action="{{ route('product') }}" method="GET">
+<div id="table-striped">
+<div class="search" id="search">
+  <form method="GET">
   @csrf
   <!-- 検索フォーム -->
   <div class="product_name.search">
@@ -90,9 +91,9 @@
       <td>{{ $product->updated_at }}</td>
       <td><a href="{{ route('product.detail', ['id'=>$product->id]) }}" class="btn btn-primary">詳細</a></td>
       <td>
-        <form action="{{ route('product.destroy', ['id'=>$product->id]) }}" method="POST">
+        <form id="deleteForm-{{ $product->id }}" method="POST">
           @csrf
-          <button type="submit" class="btn btn-danger" onclick='return confirm("削除しますか？")'>削除</button>
+          <button type="submit" class="btn btn-danger" data-id="{{ $product->id }}">削除</button>
         </form>
       </td>
     </tr>
@@ -107,7 +108,7 @@
     <button type="button" onclick="location.href='{{ route('product_form') }}'"> 商品登録 </button>
   </tbody>
 </table>
-
+</div>
 
 
 @endsection

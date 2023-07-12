@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Sales;
+use Illuminate\Support\Facades\DB;
 
 
 class SalesController extends Controller
@@ -35,6 +36,6 @@ public function sub(Request $request)
         return back();
     }
 
-   return response()->json(['message' => $st],200);
+   return response()->json(['error' => '購入が完了いたしました。'],200);
 }
 }

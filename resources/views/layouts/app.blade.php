@@ -80,43 +80,74 @@
     </div>
 
     <script>
-        $(".search").click(function(){
-      $.ajax({
-         type:"GET",
-         url:"{{ route('product') }}",
-         dataType: 'json',
-      })   
-      .done(function(json){
-         //通信成功で実行される処理
-         console.log(json);
-      })
-      .fail(function(){
-         //通信が失敗した時に実行される処理
-      })
-      .always(function(){
-         //通信の成功と失敗に関わらず実行される処理
-      });
+       function handleSubmit(event) {
+        event.preventDefault(); 
+    
+        var values = getValues();
+    
+        $.ajax({
+           url: "product",
+           type: 'GET',
+           data: values,
+           dataType: 'html',
+           success: function(data) {
+            var extractedElement = $(data).find("#table-striped");
+            $("#table-striped").html(extractedElement);
+        },
+        error: function(xhr) {
+            console.log(xhr);
+        }
+    });
+
+    function getValues() {
+    var keyword = $('#keyword').val();
+    var company_id = $('#search').val();
+    var jougenprice = $('#jougenprice').val();
+    var kagenprice = $('#kagenprice').val();
+    var jougenstock = $('#jougenstock').val();
+    var kagenstock = $('#kagenstock').val();
+    return {
+        keyword: keyword,
+        company_id: company_id,
+        jougenprice: jougenprice,
+        kagenprice: kagenprice,
+        jougenstock: jougenstock,
+        kagenstock: kagenstock,
+    };
+  }
+
+  function deleteItem(event) {
+    event.preventDefault(); // フォームのデフォルトの送信を防止
+    var form = $(event.target);
+    var id = form.find('button').data('id');
+    var url = "delete" + id; // 適切なURLを指定します
+    // Ajaxリクエストの作成
+    $.ajax({
+        url: url,
+        type: 'POST',
+        data: form.serialize(),
+        success: function(data) {
+            handleSubmit(event); // handleSubmit関数の呼び出し
+        },
+        error: function(xhr) {
+            console.log(xhr);
+        }
+    });
+}
+
+    $(document).ready(function() {
+    // フォームのサブミットイベントを処理
+    $('#search').submit(handleSubmit);
+    $(document).on('submit', 'form[id^="deleteForm-"]', function(event) {
+        if(confirm("削除しますか？")) {
+            deleteItem(event);
+        } else {
+            event.preventDefault();
+        }
+    });
    });
 
-   $(".btn btn-danger").click(function(){
-      $.ajax({
-         type:"POST",
-         url:"{{ route('product.destroy') }}",
-         dataType: 'json',
-      })   
-      .done(function(json){
-         //通信成功で実行される処理
-         console.log(json);
-      })
-      .fail(function(){
-         //通信が失敗した時に実行される処理
-      })
-      .always(function(){
-         //通信の成功と失敗に関わらず実行される処理
-      });
-   });
-
-
+    }
     </script>
 </body>
 </html>
