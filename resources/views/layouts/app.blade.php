@@ -136,7 +136,7 @@
 }
 
     $(document).ready(function() {
-    
+        
     $('#search').submit(handleSubmit);
     $(document).on('submit', 'form[id^="deleteForm-"]', function(event) {
         if(confirm("削除しますか？")) {
