@@ -6,7 +6,7 @@
 
 <div id="table-striped">
 <div class="search" id="search">
-  <form method="GET">
+  <form method="GET" id="search">
   @csrf
   <!-- 検索フォーム -->
   <div class="product_name.search">
@@ -55,7 +55,7 @@
 
   </div>
   
-  <input type="submit" value="検索" id="kensaku">
+  <button type="submit" value="検索" id="kensaku">検索</button>
   </form>
 </div>
 
@@ -91,7 +91,7 @@
       <td>{{ $product->updated_at }}</td>
       <td><a href="{{ route('product.detail', ['id'=>$product->id]) }}" class="btn btn-primary">詳細</a></td>
       <td>
-        <form id="deleteForm-{{ $product->id }}" method="POST">
+        <form id="deleteForm-['id'=>$product->id]" method="POST">
           @csrf
           <button type="submit" class="btn btn-danger" data-id="{{ $product->id }}">削除</button>
         </form>

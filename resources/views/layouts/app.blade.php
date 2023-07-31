@@ -82,7 +82,8 @@
     <script>
        function handleSubmit(event) {
         event.preventDefault(); 
-    
+
+        function searchItem(event) {
         var values = getValues();
     
         $.ajax({
@@ -91,8 +92,9 @@
            data: values,
            dataType: 'html',
            success: function(data) {
-            var extractedElement = $(data).find("#table-striped");
-            $("#table-striped").html(extractedElement);
+            var extractedElement = $(data).find("#search");
+            $("#search").html(extractedElement);
+            $('.loading').addClass('display-none');
         },
         error: function(xhr) {
             console.log(xhr);
@@ -115,6 +117,7 @@
         kagenstock: kagenstock,
     };
   }
+        }
 
   function deleteItem(event) {
     event.preventDefault();
@@ -137,10 +140,18 @@
 
     $(document).ready(function() {
         
-    $('#search').submit(handleSubmit);
+    $('.search').submit(handleSubmit);
     $(document).on('submit', 'form[id^="deleteForm-"]', function(event) {
         if(confirm("削除しますか？")) {
             deleteItem(event);
+        } else {
+            event.preventDefault();
+        }
+    });
+
+    $(document).on('submit', 'search', function(event) {
+        if() {
+            searchItem(event);
         } else {
             event.preventDefault();
         }
