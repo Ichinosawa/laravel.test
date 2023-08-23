@@ -5,7 +5,7 @@
 @section('content')
 
 <div id="table-striped">
-<div class="search" id="search">
+<div class="search" >
   <form method="GET" id="search">
   @csrf
   <!-- 検索フォーム -->
@@ -16,7 +16,7 @@
 
   <div class="company_name.serch">
   <label for="company_name">{{ __('メーカー') }}<span class="badge badge-danger ml-2">{{ __('必須') }}</span></label>
-        <select class="form-control" name="search" id="search">
+        <select class="form-control" name="search" >
           <option>{{"メーカーを選択してください"}}</option>
           <option>{{""}}</option>
         @foreach ($companies as $company)
