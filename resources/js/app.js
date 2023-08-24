@@ -1,81 +1,86 @@
 import './bootstrap';
 
-function handleSubmit(event) {
-    event.preventDefault(); 
 
-    function searchItem(event) {
-    var values = getValues();
+$(document).ready(function(){
 
-    $.ajax({
-       url: "product",
-       type: 'GET',
-       data: values,
-       dataType: 'html',
-       success: function(data) {
-        var extractedElement = $(data).find("#search");
-        $("#search").html(extractedElement);
-        $('.loading').addClass('display-none');
-    },
-    error: function(xhr) {
-        console.log(xhr);
-    }
-});
+    $('#kensaku').on('click',function(event){
+        console.log('kensaku');
+        event.preventDefault();
+        $.ajax({
+            url: "product",
+            type: 'GET',
+            data: $('#search').serialize(),
+            dataType: 'html',
+            success: function(data){
+                console.log('成功');
+                var extractedElement = $(data).find("#product-table");
+                $("#product-table").html(extractedElement);
+                $('.loading').addClass('display-none');
+            },
+            error: function(xhr){
+                console.log(xhr);
+            }
+        });
+    });
+})
 
-function getValues() {
-var keyword = $('#keyword').val();
-var company_id = $('#search').val();
-var jougenprice = $('#jougenprice').val();
-var kagenprice = $('#kagenprice').val();
-var jougenstock = $('#jougenstock').val();
-var kagenstock = $('#kagenstock').val();
-return {
-    keyword: keyword,
-    company_id: company_id,
-    jougenprice: jougenprice,
-    kagenprice: kagenprice,
-    jougenstock: jougenstock,
-    kagenstock: kagenstock,
-};
-}
-    }
+$(document).ready(function(){
 
-function deleteItem(event) {
-event.preventDefault();
-var form = $(event.target);
-var id = form.find('button').data('id');
-var url = "delete" + id; 
+    $('#sakujo').on('click',function(event){
+        console.log('sakujo');
+        event.preventDefault();
+        $.ajax({
+            url: "product.destroy",
+            type: 'POST',
+            data: $('#sakujo-form').serialize(),
+            dataType: 'html',
+            success: function(data){
+                console.log('成功');
+                var exElement = $(data).find("#sakujo-form");
+                $("#sakujo-form").html(exElement);
+            },
+            error: function(xhr){
+                console.log(xhr);
+            }
+        });
+    });
+})
 
-$.ajax({
-    url: url,
-    type: 'POST',
-    data: form.serialize(),
-    success: function(data) {
-        handleSubmit(event); 
-    },
-    error: function(xhr) {
-        console.log(xhr);
-    }
-});
-}
+// function deleteItem(event) {
+// event.preventDefault();
+// var form = $(event.target);
+// var id = form.find('button').data('id');
+// var url = "delete" + id; 
 
-$(document).ready(function() {
+// $.ajax({
+//     url: url,
+//     type: 'POST',
+//     data: form.serialize(),
+//     success: function(data) {
+//         handleSubmit(event); 
+//     },
+//     error: function(xhr) {
+//         console.log(xhr);
+//     }
+// });
+// }
+
+// $(document).ready(function() {
     
-$('.search').submit(handleSubmit);
-$(document).on('submit', 'form[id^="deleteForm-"]', function(event) {
-    if(confirm("削除しますか？")) {
-        deleteItem(event);
-    } else {
-        event.preventDefault();
-    }
-});
+// $('.search').submit(handleSubmit);
+// $(document).on('submit', 'form[id^="deleteForm-"]', function(event) {
+//     if(confirm("削除しますか？")) {
+//         deleteItem(event);
+//     } else {
+//         event.preventDefault();
+//     }
+// });
 
-$(document).on('submit', 'search', function(event) {
-    if(any) {
-        searchItem(event);
-    } else {
-        event.preventDefault();
-    }
-});
-});
-
-}
+// $(document).on('submit', 'search', function(event) {
+//     if(any) {
+//         searchItem(event);
+//     } else {
+//         event.preventDefault();
+//     }
+// });
+// });

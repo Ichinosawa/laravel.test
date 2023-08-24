@@ -61,7 +61,7 @@
 
 <h1>商品一覧</h1>
 
-<table class="table table-striped">
+<table class="table table-striped" id="product-table">
   <thead>
     <tr>
       <th>@sortablelink('id', 'ID')</th>  
@@ -91,9 +91,9 @@
       <td>{{ $product->updated_at }}</td>
       <td><a href="{{ route('product.detail', ['id'=>$product->id]) }}" class="btn btn-primary">詳細</a></td>
       <td>
-        <form id="deleteForm-['id'=>$product->id]" method="POST">
+        <form id="sakujo-form" method="POST">
           @csrf
-          <button type="submit" class="btn btn-danger" data-id="{{ $product->id }}">削除</button>
+          <button type="submit" class="btn btn-danger" id="sakujo">削除</button>
         </form>
       </td>
     </tr>
