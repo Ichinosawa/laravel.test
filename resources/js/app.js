@@ -27,12 +27,14 @@ $(document).ready(function(){
 $(document).ready(function(){
 
     $('#sakujo').on('click',function(event){
+        var productid = $(this).data("product-id")
         console.log('sakujo');
         event.preventDefault();
         $.ajax({
-            url: "product.destroy",
+            headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+            url: "/delete" + productid,
             type: 'POST',
-            data: $('#sakujo-form').serialize(),
+            data: {"id":productid,"_method":"delete"},
             dataType: 'html',
             success: function(data){
                 console.log('成功');

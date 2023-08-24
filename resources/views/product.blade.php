@@ -91,9 +91,10 @@
       <td>{{ $product->updated_at }}</td>
       <td><a href="{{ route('product.detail', ['id'=>$product->id]) }}" class="btn btn-primary">詳細</a></td>
       <td>
-        <form id="sakujo-form" method="POST">
+        <form id="sakujo-form">
           @csrf
-          <button type="submit" class="btn btn-danger" id="sakujo">削除</button>
+          @method('delete')
+          <button type="submit" class="btn btn-danger" id="sakujo" data-product-id="{{$product->id}}">削除</button>
         </form>
       </td>
     </tr>

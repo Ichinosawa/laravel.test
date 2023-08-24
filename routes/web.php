@@ -24,7 +24,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 // 商品一覧画面表示 検索機能
 Route::get('/product', [App\Http\Controllers\ProductController::class, 'showList','search'])->name('product');
 // 削除機能
-Route::post('/delete{id}', [App\Http\Controllers\ProductController::class, 'delete'])->name('product.destroy');
+Route::delete('/delete{id}', [App\Http\Controllers\ProductController::class, 'delete'])->name('product.destroy');
 // 登録画面表示
 Route::get('/product_form', [App\Http\Controllers\productController::class, 'create'])->name('product_form');
 // 登録処理

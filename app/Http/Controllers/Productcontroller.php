@@ -72,10 +72,12 @@ class Productcontroller extends Controller
         return redirect(route('product'));
     }
 
-    public function delete($id)
+    public function delete(Request $request)
     {
+        dd($request);
         // 削除機能
-        
+        $id = $request->id;
+
         $product = Product::find($id);
         
         $product->delete();
