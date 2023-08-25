@@ -74,7 +74,6 @@ class Productcontroller extends Controller
 
     public function delete(Request $request)
     {
-        dd($request);
         // 削除機能
         $id = $request->id;
 
