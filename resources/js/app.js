@@ -34,10 +34,10 @@ $(document).ready(function(){
             headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
             url: "delete" + productid,
             type: 'POST',
-            data: {"id":productid,"_method":"delete"},
+            data: $('product-table').serialize(),
             dataType: 'html',
             success: function(data){
-               $(this).closest("tr").remove();
+               $(this).parents("tr").remove();
             },
             error: function(xhr){
                 console.log(xhr);
