@@ -94,7 +94,7 @@
         <form id="sakujo-form">
           @csrf
           @method('delete')
-          <button type="submit" class="btn btn-danger" id="sakujo" data-product-id="{{$product->id}}">削除</button>
+          <button type="submit" class="btn btn-danger" name="sakujo" data-product-id="{{$product->id}}">削除</button>
         </form>
       </td>
     </tr>

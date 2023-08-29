@@ -27,17 +27,19 @@ $(document).ready(function(){
 $(document).ready(function(){
 
     $('#sakujo').on('click',function(event){
-        var productid = $(this).find("product-id")
+        var productid = $(this).data("product-id");
         console.log('sakujo');
         event.preventDefault();
+        var clickEle = $(this).parents("tr").remove();
         $.ajax({
             headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
             url: "delete" + productid,
             type: 'POST',
-            data: $('product-table').serialize(),
+            data: {"_method":"delete",},
             dataType: 'html',
-            success: function(data){
-               $(this).parents("tr").remove();
+            success: function(){
+                console.log('削除します');
+                console.log(clickEle);
             },
             error: function(xhr){
                 console.log(xhr);
