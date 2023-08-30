@@ -30,7 +30,7 @@ $(document).ready(function(){
         var productid = $(this).data("product-id");
         console.log('sakujo');
         event.preventDefault();
-        var clickEle = $(this).parents("tr").remove();
+        var clickEle = $(this);
         $.ajax({
             headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
             url: "delete" + productid,
@@ -38,8 +38,7 @@ $(document).ready(function(){
             data: {"_method":"delete",},
             dataType: 'html',
             success: function(){
-                console.log('削除します');
-                console.log(clickEle);
+                clickEle.parents('tr').remove();
             },
             error: function(xhr){
                 console.log(xhr);
