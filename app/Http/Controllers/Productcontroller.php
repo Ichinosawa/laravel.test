@@ -75,8 +75,6 @@ class Productcontroller extends Controller
     public function delete($id)
     {
         // 削除機能
-        $id = $request->id;
-
         $product = Product::find($id);
         
         $product->delete();

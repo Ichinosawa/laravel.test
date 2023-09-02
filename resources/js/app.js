@@ -26,7 +26,7 @@ $(document).ready(function(){
 
 $(document).ready(function(){
 
-    $('#sakujo').on('click',function(event){
+    $('.sakujoBtn').on('click',function(event){
         var productid = $(this).data("product-id");
         console.log('sakujo');
         event.preventDefault();
