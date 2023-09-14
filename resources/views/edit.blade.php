@@ -50,6 +50,13 @@
          <p>{{ $errors->first('comment') }}</p>
         @endif
       </div>
+
+      <div class="form-group">
+       <label for="img">{{ __('画像') }}<span class="badge badge-danger ml-2">{{ __('必須') }}</span></label>
+       <input type="file" name="image">
+       <img src="{{ asset($product->img_path) }}">
+       <button>アップロード</button>
+      </div>
     </fieldset>
     <div class="d-flex justify-content-between pt-3">
         <a href="{{ route('product.detail', ['id'=>$product->id]) }}" class="btn btn-outline-secondary" role="button">

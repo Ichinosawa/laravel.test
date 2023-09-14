@@ -89,7 +89,7 @@
       <td><form method="POST" action="/upload" enctype="multipart/form-data">
   @csrf
   <input type="file" name="image">
-  <img src="{{ asset($image->path) }}">
+  <img src="{{ asset($product->img_path) }}">
   <button>アップロード</button>
  </form>
  </td>
