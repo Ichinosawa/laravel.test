@@ -54,7 +54,6 @@
       <div class="form-group">
        <label for="img">{{ __('画像') }}<span class="badge badge-danger ml-2">{{ __('必須') }}</span></label>
        <input type="file" name="image">
-       <img src="{{ asset($product->img_path) }}">
        <button>アップロード</button>
       </div>
     </fieldset>

@@ -86,13 +86,7 @@
       <td>{{ $product->price }}</td>
       <td>{{ $product->stock }}</td>
       <td>{{ $product->comment }}</td>
-      <td><form method="POST" action="/upload" enctype="multipart/form-data">
-  @csrf
-  <input type="file" name="image">
-  <img src="{{ asset($product->img_path) }}">
-  <button>アップロード</button>
- </form>
- </td>
+      <td><img src="{{ asset($product->img_path) }}"></td>
       <td>{{ $product->created_at }}</td>
       <td>{{ $product->updated_at }}</td>
       <td><a href="{{ route('product.detail', ['id'=>$product->id]) }}" class="btn btn-primary">詳細</a></td>
