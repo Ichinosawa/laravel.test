@@ -28,13 +28,13 @@ Route::delete('/delete{id}', [App\Http\Controllers\ProductController::class, 'de
 // 登録画面表示
 Route::get('/product_form', [App\Http\Controllers\productController::class, 'create'])->name('product_form');
 // 登録処理
-Route::post('/product_form', [App\Http\Controllers\productController::class, 'exeCreate'])->name('submit');
+Route::post('/product_form', [App\Http\Controllers\productController::class, 'exeCreate','upload'])->name('submit');
 // 詳細画面
 Route::get('/detail{id}', [App\Http\Controllers\productController::class, 'detail'])->name('product.detail');
 // 編集画面
 Route::get('/edit/{id}', [App\Http\Controllers\productController::class, 'edit'])->name('product.edit');
 // 更新処理
-Route::post('/update/{id}', [App\Http\Controllers\productController::class, 'update'])->name('product.update');
+Route::post('/update/{id}', [App\Http\Controllers\productController::class, 'update','upload'])->name('product.update');
 
 Auth::routes();
 

@@ -52,9 +52,11 @@
       </div>
 
       <div class="form-group">
+      <form method="POST" action="/upload" enctype="multipart/form-data">
        <label for="img">{{ __('画像') }}<span class="badge badge-danger ml-2">{{ __('必須') }}</span></label>
        <input type="file" name="image">
        <button>アップロード</button>
+      </form>
       </div>
     </fieldset>
     <div class="d-flex justify-content-between pt-3">

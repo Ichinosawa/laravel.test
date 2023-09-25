@@ -16,7 +16,7 @@
   </thead>
   <tbody>
     <tr>
-    <td>{{ $product->img_path }}</td>
+    <td><img src="{{ asset($product->img_path) }}"></td>
     <td>{{ $product->product_name }}</td>
     @foreach ($companies as $company)
     <td>{{ $company->company_name }}</td>
