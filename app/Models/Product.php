@@ -39,14 +39,14 @@ class Product extends Model
         return $products;
     }
 
-    public function registProduct($data) {
+    public function registProduct($data,$image_path) {
         // 登録処理
         DB::table('products') ->insert([
             'product_name' => $data->product_name,
             'price' => $data->price,
             'stock' => $data->stock,
             'comment' => $data->comment,
-            'img_path' => $data->img_path,
+            'img_path' => $image_path,
             'company_id' => $data->company_id,
             'created_at' => NOW(),
             'updated_at' => NOW(),
@@ -54,7 +54,7 @@ class Product extends Model
 
     }
 
-    public function updateProduct($request, $product)
+    public function updateProduct($request, $product,$image_path)
     {
         // 更新処理
         $result = $product->fill([
@@ -62,7 +62,7 @@ class Product extends Model
             'price' => $request->price,
             'stock' => $request->stock,
             'comment' => $request->comment,
-            'img_path' => $request->img_path,
+            'img_path' => $image_path,
             'updated_at' => NOW(),
             'company_id' => $request->company_id
         ])->save();

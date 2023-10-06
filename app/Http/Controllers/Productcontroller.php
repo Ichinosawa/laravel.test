@@ -11,26 +11,26 @@ use Illuminate\Support\Facades\DB;
 
 class Productcontroller extends Controller
 {
-    public function upload(Request $request)
-    {
-        // ディレクトリ名
-        $dir = 'sample';
+    // public function upload(Request $request)
+    // {
+    //     // ディレクトリ名
+    //     $dir = 'sample';
 
-        // アップロードされたファイル名を取得
-        $file_name = $request->file('image')->getClientOriginalName();
+    //     // アップロードされたファイル名を取得
+    //     $file_name = $request->file('image')->getClientOriginalName();
 
-        // 取得したファイル名で保存
-        $request->file('image')->storeAs('public/' . $dir, $file_name);
+    //     // 取得したファイル名で保存
+    //     $request->file('image')->storeAs('public/' . $dir, $file_name);
 
-        // ファイル情報をDBに保存
-        $image = new Image();
-        $image->name = $file_name;
-        $image->path = 'storage/' . $dir . '/' . $file_name;
-        $image->save();
+    //     // ファイル情報をDBに保存
+    //     $image = new Image();
+    //     $image->name = $file_name;
+    //     $image->path = 'storage/' . $dir . '/' . $file_name;
+    //     $image->save();
 
 
-        return redirect('/');
-    }
+    //     return redirect('/');
+    // }
 
 
     public function showList(Request $request)
@@ -74,6 +74,18 @@ class Productcontroller extends Controller
     }
 
     public function exeCreate(Request $request){
+         // ディレクトリ名
+         $dir = 'sample';
+
+         // アップロードされたファイル名を取得
+         $file_name = $request->file('image')->getClientOriginalName();
+ 
+         // 取得したファイル名で保存
+         $request->file('image')->storeAs('public/' . $dir, $file_name);
+ 
+         // ファイル情報をDBに保存
+         $image_path='storage/' . $dir . '/' . $file_name;
+ 
 
         // 登録処理
 
@@ -81,7 +93,7 @@ class Productcontroller extends Controller
 
         try {      
             $model = new Product();
-            $model->registProduct($request);
+            $model->registProduct($request,$image_path);
             DB::commit();
         } catch (\Exception $e) {
             DB::rollback();
@@ -125,10 +137,22 @@ class Productcontroller extends Controller
 
     public function update(ProductRequest $request, $id)
     {
+        // ディレクトリ名
+        $dir = 'sample';
+
+        // アップロードされたファイル名を取得
+        $file_name = $request->file('image')->getClientOriginalName();
+
+        // 取得したファイル名で保存
+        $request->file('image')->storeAs('public/' . $dir, $file_name);
+
+        // ファイル情報をDBに保存
+        $image_path='storage/' . $dir . '/' . $file_name;
+
         // 更新処理
 
         $product = Product::find($id);
-        $product->updateProduct($request, $product);
+        $product->updateProduct($request, $product,$image_path);
         $companies = $product ->getCompanyNameById();
 
         return redirect()->route('product', compact('product','companies'));
